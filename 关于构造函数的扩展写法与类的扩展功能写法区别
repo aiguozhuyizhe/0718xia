@@ -1,0 +1,65 @@
+- 构造函数的扩展功能写法如下：
+class A():
+    pass
+class B(A):
+    def __init__(self,name,adr):
+        print("B")
+        print(name)
+        print("adr")
+class C(B):
+    def __init__(self,name,adr):#先初始化父类中的参数
+        # C中想扩展B的构造函数后添加功能
+        #方法1：
+        #B.__init__(self,name)
+        #方法2：
+        #首先调用父类构造函数
+        super(C, self).__init__(name,adr)
+        #以下是添加的功能
+        age = 18
+        print("年龄是{0}".format(age))
+
+
+
+c=C("xiaojia
+
+#类的扩展功能写法如下：
+#子类扩充父类功能案例
+#人由工作的函数  老师也有工作函数，但老师工作需要讲课
+class Person():
+    name = "NoNanem"
+    age = 18
+    __score = 0 #年龄是秘密，只能自己知道
+    _petname = "sec"# 小名，是保护的，子类可以用，但不能公用
+    def sleep(self):
+        print("Sleeping ....")
+    def work(self,adr):
+        print("adr is ")
+        print("make some money")
+
+
+# 父类写在括号里面
+class Teachar(Person):
+    teachar_id = "9527"
+    name = "XIAOJIA"
+    def make_test(self):
+        print("attention")
+    def work(self,adr):
+        #扩充父类的功能只需要调用父类相同的函数
+         #方法1
+         Person.work(self,adr)
+        #方法2 super代表得到父类
+       # super().work()
+        #self.make_test()
+
+t=Teachar()
+t.work(" mingxi")
+
+区别：
+     1： 构造函数的方法一：
+           父类名.__init__(self,参数)   参数的有无根据父类参数来匹配
+         类的方法一：
+           父类名.父类函数名（self，参数)  参数的有无根据父类参数来匹配
+     2:  构造函数方法二：super
+           super.(自身类名,self).__init__（除self以外的父类参数）  参数的有无根据父类参数来匹配
+         类的方法二：super
+            super().父类函数名()
